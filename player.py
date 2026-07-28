@@ -1,32 +1,32 @@
 def player_choose_number():
     while True:
-        player_number = int(input("Enter your secret number (1-100): "))
+        try:
+            number = int(input("Choose your secret number (1-100): "))
+            if 1 <= number <= 100:
+                return number
+        except:
+            pass
 
-        if 1 <= player_number <= 100:
-            return player_number
-        else:
-            print("Invalid input! Please enter a number between 1 and 100.")
+        print("Invalid input.")
 
 
 def player_turn(ai_secret_number):
+
     while True:
         try:
-            guess = int(input("\nGuess the AI's number (1-100): "))
-            if 1 <= guess <= 100:
-                break
+            guess = int(input("Your guess: "))
+            break
+        except:
+            print("Enter a valid number.")
 
-            print("Please enter a number between 1 and 100.")
-
-        except ValueError:
-            print("Invalid input! Please enter a number.")
-    
-    
     if guess < ai_secret_number:
-        print("🤖 AI says: Higher")
+        print("⬆️ Higher")
         return False
+
     elif guess > ai_secret_number:
-        print("🤖 AI says: Lower")
+        print("⬇️ Lower")
         return False
+
     else:
-        print("\n🎉 You guessed the AI's number!")
+        print("🎉 Correct!")
         return True
