@@ -34,8 +34,8 @@ if "high" not in st.session_state:
 if "ai_guess" not in st.session_state:
     st.session_state.ai_guess = None
 
-if "player_hint" not in st.session_state:
-    st.session_state.player_hint = ""
+if "last_hint" not in st.session_state:
+    st.session_state.last_hint = ""
 
 # ---------------- Start Screen ---------------- #
 
@@ -56,6 +56,10 @@ if not st.session_state.game_started:
 # ---------------- Game ---------------- #
 
 if st.session_state.game_started and not st.session_state.game_over:
+
+    # Show previous hint
+    if st.session_state.last_hint:
+        st.info(st.session_state.last_hint)
 
     # ================= AI TURN ================= #
 
@@ -90,6 +94,7 @@ if st.session_state.game_started and not st.session_state.game_over:
                 st.session_state.game_over = True
 
             if not st.session_state.game_over:
+
                 st.session_state.ai_guess = (
                     st.session_state.low + st.session_state.high
                 ) // 2
@@ -128,24 +133,19 @@ if st.session_state.game_started and not st.session_state.game_over:
         if submit:
 
             if guess < st.session_state.ai_number:
-                st.session_state.player_hint = "⬆️ AI says: Higher!"
+                st.session_state.last_hint = "⬆️ AI says: Higher!"
+                st.session_state.turn = "ai"
+                st.rerun()
 
             elif guess > st.session_state.ai_number:
-                st.session_state.player_hint = "⬇️ AI says: Lower!"
+                st.session_state.last_hint = "⬇️ AI says: Lower!"
+                st.session_state.turn = "ai"
+                st.rerun()
 
             else:
                 st.success("🎉 You guessed the AI's number!")
                 st.balloons()
                 st.session_state.game_over = True
-
-        if st.session_state.player_hint:
-
-            st.info(st.session_state.player_hint)
-
-            if st.button("➡️ Continue to AI Turn"):
-                st.session_state.player_hint = ""
-                st.session_state.turn = "ai"
-                st.rerun()
 
         if new_game:
 
@@ -156,7 +156,7 @@ if st.session_state.game_started and not st.session_state.game_over:
             st.session_state.turn = "ai"
             st.session_state.game_started = False
             st.session_state.game_over = False
-            st.session_state.player_hint = ""
+            st.session_state.last_hint = ""
 
             st.rerun()
 
@@ -175,6 +175,6 @@ if st.session_state.game_over:
         st.session_state.turn = "ai"
         st.session_state.game_started = False
         st.session_state.game_over = False
-        st.session_state.player_hint = ""
+        st.session_state.last_hint = ""
 
         st.rerun()
