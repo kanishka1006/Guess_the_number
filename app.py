@@ -10,7 +10,7 @@ st.markdown("""
 <style>
 
 .stApp {
-    background-color: #0E1117;
+    background-color: #06141;
 }
 
 [data-testid="stHeading"] {
@@ -22,12 +22,28 @@ h2, h3 {
 
 .stButton > button {
     width: 100%;
-    border-radius: 12px;
-    height: 3em;
-    font-weight: bold;
-    font-size: 16px;
+    height: 3.2em;
+
+    background-color: #11212D;
+    color: #CCD0CF;
+
+    border: 1px solid #4A5C6A;
+    border-radius: 20px;
+
+    font-size: 17px;
+    font-weight: 600;
+
+    transition: all 0.3s ease;
 }
 
+.stButton > button:hover {
+    background-color: #253745;
+    border: 1px solid #9BA8AB;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+
+    transform: translateY(-3px);
+}
 .stNumberInput label {
     color: white !important;
 }
@@ -48,7 +64,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.subheader("Player vs AI")
+st.markdown(
+    "<h2 style='color:#9BA8AB;'>Player vs AI</h2>",
+    unsafe_allow_html=True
+)
 st.markdown("---")
 
 
