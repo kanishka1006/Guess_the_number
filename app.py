@@ -6,10 +6,52 @@ st.set_page_config(
     page_icon="🎮",
     layout="centered"
 )
+st.markdown("""
+<style>
 
-st.title("🎮 Guess The Number")
+.stApp {
+    background-color: #0E1117;
+}
+
+[data-testid="stHeading"] {
+    color: #00FFAA !important;
+}
+h2, h3 {
+    color: white;
+}
+
+.stButton > button {
+    width: 100%;
+    border-radius: 12px;
+    height: 3em;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.stNumberInput label {
+    color: white !important;
+}
+
+.stRadio label {
+    color: white !important;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown(
+    """
+    <h1 style='text-align:center; color:#00FFAA;'>
+    🎮 Guess The Number
+    </h1>
+    """,
+    unsafe_allow_html=True
+)
+
 st.subheader("Player vs AI")
 st.markdown("---")
+
+
 
 # ---------------- Session State ---------------- #
 
@@ -36,6 +78,30 @@ if "ai_guess" not in st.session_state:
 
 if "last_hint" not in st.session_state:
     st.session_state.last_hint = ""
+
+if "player_score" not in st.session_state:
+    st.session_state.player_score = 0
+
+if "ai_score" not in st.session_state:
+    st.session_state.ai_score = 0
+
+#------------------SCOREBOARD-------------------------#
+st.markdown(
+    f"""
+    <div style="
+        display:flex;
+        justify-content:space-around;
+        padding:15px;
+        border:1px solid #00FFAA;
+        border-radius:15px;
+        margin-bottom:20px;
+    ">
+        <h3>🏆 Player: {st.session_state.player_score}</h3>
+        <h3>🤖 AI: {st.session_state.ai_score}</h3>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # ---------------- Start Screen ---------------- #
 
@@ -91,6 +157,7 @@ if st.session_state.game_started and not st.session_state.game_over:
             else:
                 st.success("🤖 AI guessed your number!")
                 st.balloons()
+                st.session_state.ai_score += 1
                 st.session_state.game_over = True
 
             if not st.session_state.game_over:
@@ -145,6 +212,7 @@ if st.session_state.game_started and not st.session_state.game_over:
             else:
                 st.success("🎉 You guessed the AI's number!")
                 st.balloons()
+                st.session_state.player_score += 1
                 st.session_state.game_over = True
 
         if new_game:
