@@ -10,11 +10,11 @@ st.markdown("""
 <style>
 
 .stApp {
-    background-color: #06141;
+    background-color: #06141B;
 }
 
 [data-testid="stHeading"] {
-    color: #00FFAA !important;
+    color: #9BA8AB!important;
 }
 h2, h3 {
     color: white;
@@ -40,7 +40,7 @@ h2, h3 {
     background-color: #253745;
     border: 1px solid #9BA8AB;
 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    box-shadow: 0 0 25px rgba(155,168,171,0.45);
 
     transform: translateY(-3px);
 }
@@ -57,7 +57,7 @@ h2, h3 {
 
 st.markdown(
     """
-    <h1 style='text-align:center; color:#00FFAA;'>
+    <h1 style='text-align:center; color:#CCD0CF; margin-top:30px;'>
     🎮 Guess The Number
     </h1>
     """,
@@ -111,12 +111,13 @@ st.markdown(
         display:flex;
         justify-content:space-around;
         padding:15px;
-        border:1px solid #00FFAA;
+        border:1px solid #4A5C6A;
         border-radius:15px;
         margin-bottom:20px;
     ">
-        <h3>🏆 Player: {st.session_state.player_score}</h3>
-        <h3>🤖 AI: {st.session_state.ai_score}</h3>
+        <h4 style="color:#CCD0CF;">🏆 Player: {st.session_state.player_score}</h4>
+        <h4 style="color:#CCD0CF;">🤖 AI: {st.session_state.ai_score}</h4>
+
     </div>
     """,
     unsafe_allow_html=True
